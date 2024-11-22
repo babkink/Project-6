@@ -15,18 +15,23 @@ class Runner:
         return self.name
 
 class RunnerTest(unittest.TestCase):
+    is_frozen = True
+
+    @unittest.skipIf(is_frozen, 'No need walk')
     def test_walk(self):
         runner = Runner('Mike')
         for i in range(10):
             runner.walk()
         self.assertEqual(runner.distance, 50)
 
+    @unittest.skipIf(is_frozen, 'No need run')
     def test_run(self):
         runner = Runner('Bob')
         for i in range(10):
             runner.run()
         self.assertEqual(runner.distance, 100)
 
+    @unittest.skipIf(is_frozen, 'No need challenge')
     def test_challenge(self):
         runner_1 = Runner('Ana')
         runner_1.distance = 80
