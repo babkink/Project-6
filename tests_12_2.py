@@ -31,7 +31,7 @@ class Tournament:
         finishers = {}
         place = 1
         for participant in self.participants:
-            participant.run()
+            participant.walk()
             time = self.full_distance / participant.speed
             finishers[time] = participant.name
         sorted_finishers = dict(sorted(finishers.items()))
@@ -42,6 +42,7 @@ class Tournament:
         return finishers
 
 class TournamentTest(unittest.TestCase):
+    is_frozen = False
     @classmethod
     def setUpClass(cls):
         global all_results
@@ -59,18 +60,21 @@ class TournamentTest(unittest.TestCase):
         r_2 = Runner('Bob', 9)
         r_3 = Runner('Ana', 3)
 
+    @unittest.skipIf(is_frozen, 'No need 1')
     def test_Tournament_run_1(self):
         t_1 = Tournament(90, r_1, r_3)
         a = t_1.start()
         all_results.append(a)
         self.assertTrue(list(a.values())[-1] == 'Ana')
 
+    @unittest.skipIf(is_frozen, 'No need 2')
     def test_Tournament_run_2(self):
         t_2 = Tournament(90, r_2, r_3)
         b = t_2.start()
         all_results.append(b)
         self.assertTrue(list(b.values())[-1] == 'Ana')
 
+    @unittest.skipIf(is_frozen, 'No need 3')
     def test_Tournament_run_3(self):
         global all_results
         t_3 = Tournament(90, r_1, r_2, r_3)
@@ -78,6 +82,7 @@ class TournamentTest(unittest.TestCase):
         all_results.append(c)
         self.assertTrue(list(c.values())[-1] == 'Ana')
 
+    @unittest.skipIf(is_frozen, 'No need 4')
     def test_Tournament_run_4(self):
         global all_results
         t_4 = Tournament(4, r_3, r_2, r_1)
