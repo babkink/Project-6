@@ -1,8 +1,5 @@
 import unittest
 
-from PIL.IcnsImagePlugin import read_32t
-
-
 class Runner:
     def __init__(self, name, speed=5):
         self.name = name
@@ -10,10 +7,10 @@ class Runner:
         self.speed = speed
 
     def run(self):
-        self.distance += self.speed * 2
+        self.speed = self.speed * 2
 
     def walk(self):
-        self.distance += self.speed
+        self.speed = self.speed
 
     def __str__(self):
         return self.name
@@ -33,13 +30,15 @@ class Tournament:
     def start(self):
         finishers = {}
         place = 1
-        while self.participants:
-            for participant in self.participants:
-                participant.run()
-                if participant.distance >= self.full_distance:
-                    finishers[place] = participant.name
-                    place += 1
-                    self.participants.remove(participant)
+        for participant in self.participants:
+            participant.run()
+            time = self.full_distance / participant.speed
+            finishers[time] = participant.name
+        sorted_finishers = dict(sorted(finishers.items()))
+        finishers.clear()
+        for i in sorted_finishers.items():
+            finishers[place] = i[1]
+            place += 1
         return finishers
 
 class TournamentTest(unittest.TestCase):
