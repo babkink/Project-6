@@ -10,12 +10,10 @@ dp = Dispatcher(bot, storage=MemoryStorage())
 @dp.message_handler(commands='start')
 async def start(message):
     await message.answer('Hello, I am bot to help you! ')
-    print('start')
 
 @dp.message_handler()
 async def start(message):
-    print('Please enter /start command to start')
-    await message.answer(message.text.upper())
+    await message.answer('Please enter /start command to start')
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
