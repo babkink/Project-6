@@ -1,5 +1,5 @@
 
-API = '7904537344:AAEccRi__wrFtO5FMWSYS8b82zbYatWdQQw'
+API = ''
 
 price_10 = 1000
 price_20 = 2000
